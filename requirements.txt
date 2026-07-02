@@ -1,0 +1,9 @@
+opencv-python
+# mediapipe broke the solutions API in 0.10.15, this exact version is needed
+mediapipe==0.10.14
+hsemotion-onnx
+onnxruntime
+numpy<2
+fastapi
+uvicorn[standard]
+websockets
