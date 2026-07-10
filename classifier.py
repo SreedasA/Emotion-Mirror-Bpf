@@ -9,7 +9,7 @@ _model = HSEmotionRecognizer(model_name="enet_b0_8_best_afew")
 
 # the model outputs 8 classes, we only show 5
 # contempt looks almost identical to anger on camera so it folds in
-# fear maps to surprised -- raised brows + wide eyes is the same expression
+# fear maps to surprised, raised brows + wide eyes is the same expression
 # disgust doesn't cleanly belong to any one bucket (confused with anger, fear,
 # sad, and neutral about equally in the literature), so it falls back to
 # neutral rather than artificially inflating "angry"
@@ -26,8 +26,7 @@ LABEL_MAP = {
 
 LABELS = ["angry", "happy", "neutral", "sad", "surprised"]
 
-# 0.30 felt right after testing -- below this the model is basically
-# split between two emotions and the label just flickers
+# 0.30 felt right after testing, below this the model is basically split between two emotions and the label just flickers
 THRESHOLD = 0.30
 
 
@@ -41,8 +40,7 @@ def _merge_probs(raw_scores):
 
 
 class Smoother:
-    # averages probability vectors over the last N frames so the label doesn't
-    # jump around on every frame -- 6 frames at 10fps is about 0.6 seconds
+    # averages probability vectors over the last N frames so the label doesn't jump around on every frame, 6 frames at 10fps is about 0.6 seconds
     def __init__(self, window=6):
         self._bufs = {}
         self.window = window
