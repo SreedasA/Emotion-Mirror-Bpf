@@ -22,7 +22,7 @@ def detect_faces(frame):
         x = max(int(x_raw), 0)
         y = max(int(y_raw), 0)
         # shrink the box if the face clips the frame edge rather than just
-        # clamping the origin -- otherwise the crop comes out wrong
+        # clamping the origin, otherwise the crop comes out wrong
         bw = max(min(int(w_raw - (x - x_raw)), w - x), 0)
         bh = max(min(int(h_raw - (y - y_raw)), h - y), 0)
 
