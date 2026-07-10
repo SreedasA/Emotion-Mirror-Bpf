@@ -25,8 +25,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 async def index():
     return HTMLResponse(Path("static/index.html").read_text(encoding="utf-8"))
 
-
-# single smoother for the session -- fine for a local single-user demo
 _smoother = Smoother(window=6)
 _prev_faces = []
 
@@ -95,8 +93,7 @@ async def websocket(ws: WebSocket):
             if frame is None:
                 await ws.send_text("[]")
                 continue
-            # learned the hard way that running inference on the event loop
-            # makes the websocket unresponsive -- thread it
+            # learned the hard way that running inference on the event loop makes the websocket unresponsive
             result = await asyncio.to_thread(_run, frame)
             await ws.send_text(json.dumps(result))
     except WebSocketDisconnect:
